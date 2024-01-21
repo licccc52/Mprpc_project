@@ -64,5 +64,8 @@ service UserServiceRpc //服务类
 //                                      都通过父类指针指向子类同名覆盖方法(新定义的MyRpcChannel类中重写的CallMethod()函数)
 
 
+// class UserServiceRpc : public google::protobuf::Service  服务提供者 -> 把用户提供的方法生成了相应的虚函数
+// class UserServiceRpc_Stub : public UserServiceRpc    服务消费者 
+
 
 // protoc test.proto --cpp_out=./

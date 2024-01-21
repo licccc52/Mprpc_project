@@ -19,4 +19,14 @@
 2. 各模块之间如何访问?  机器一上的模块怎么调用机器2上的模块的一个业务方法?           /
 
 
-# protobuf
+## protobuf =>> json
+1. protobuf二进制存储; xml和json都是文本存储
+2. protobuf不需要存储额外的信息
+
+## 
+1. ./bin 可执行文件
+2. ./build CMake 构建编译项目文件
+3. ./examle 使用框架的服务消费者
+4. ./lib 库文件
+5. ./src 源代码
+6. ./test 测试
