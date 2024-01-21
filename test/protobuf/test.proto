@@ -1,12 +1,20 @@
 syntax = "proto3"; // 声明了protobuf的版本
 
+package Joy; // 声明了代码所在的包（对于C++来说是namespace）
+
 // 定义下面的选项，表示生成service服务类和rpc方法描述，默认是不生成的
-// protoc test.proto --cpp_out=./ , 生成两个文件, 含有设定的数据类型的类, 有 get和set方法
+option cc_generic_services = true;
+
+message ResultCode //message方法继承自 public::google::protobuf::Message
+{
+    int32 errcode = 1;
+    bytes errmsg = 2;
+}
 
 //（protobuf会自动帮我们生成LoginRequest类，并且写好了get和set方法）
 // 定义登录消息类型：name pwd
 message LoginRequest 
-{   //定义登录需要的数据
+{
     bytes name = 1;
     bytes pwd = 2;
 }
@@ -14,8 +22,47 @@ message LoginRequest
 // 定义登录响应消息类型
 message LoginResponse 
 {
-    int32 errcode = 1;
-    bytes errmsg = 2;
-    bool success = 3;
+    ResultCode result = 1;
+    bool success = 2;
 }
 
+message  GetFriendListRequest 
+{
+    uint32 userid = 1;
+}
+
+message User 
+{
+    bytes name = 1;
+    uint32 age = 2;
+    enum Sex
+    {
+        WOMAN = 0;
+        MAN = 1;
+    }
+    Sex sex = 3;
+}
+
+message GetFriendListResponse 
+{
+    ResultCode result = 1;
+    repeated User friendList = 2; // 定义了一个列表类型
+}
+
+// 在protobuf中如何定义描述rpc方法的类型呢 - service
+service UserServiceRpc //服务类 
+{
+    rpc Login(LoginRequest) returns(LoginResponse);  //描述了一个rpc方法, 通过描述可以去做rpc请求携带数据的序列化和反的序列化
+    rpc GetFriendList(GetFriendListRequest) returns(GetFriendListResponse);
+}
+
+// service : 生成class UserServiceRpc : 继承自 public::google::protobuf::Service;   Callee ServiceProvider rpc服务提供者
+ 
+// service : 生成class UserServiceRpc_stub(::PROTOBUF_NAMESPACE_ID::RpcChannel *channel) : 继承自 public UserServiceRpc ;     Caller ServiceConsumer rpc服务消费者
+
+// ! 创建UserServiceRp_Stub对象的时候, 构造函数需要一个RpcChannel *, 把MyRpcChannel对象传入(子类对象用父类指针接收), 调用serServiceRp_Stub对象方法的时候
+//                                      都通过父类指针指向子类同名覆盖方法(新定义的MyRpcChannel类中重写的CallMethod()函数)
+
+
+
+// protoc test.proto --cpp_out=./
