@@ -18,6 +18,6 @@ include_directories(${PROJECT_SOURCE_DIR}/example)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 # src包含了mprpc框架的所有相关代码
-# add_subdirectory(src)
+add_subdirectory(src)
 # example包含了mprpc框架的使用示例代码
 add_subdirectory(example)

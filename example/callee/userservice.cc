@@ -51,7 +51,7 @@ public:
 
 int main(int argc, char **argv)
 {
-    //调用框架的初始化操作
+    //调用框架的初始化操作 -> 指定一个config.conf文件 读取 相关的网络服务器的配置中心的 IP 和 PORT
     MprpcApplication::Init(argc, argv);
 
     //框架上发布服务
@@ -61,6 +61,7 @@ int main(int argc, char **argv)
     provider.NotifyService(new UserService());
 
     //启动一个rpc服务发布节点, Run以后, 进程进入阻塞状态, 等待远程的rpc调用请求
-    provider.run();
+    provider.Run();
+
     return 0;
 }

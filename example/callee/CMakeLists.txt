@@ -7,6 +7,6 @@ set(SRC_LIST userservice.cc ../user.pb.cc)
 # add_executable(provider ${SRC_LIST} ${PROTO_LIST})
 
 #生成可执行文件 provider
-add_executable(provider ${SRC_LIST}) 
+add_executable(provider ${SRC_LIST})
 # 需要链接的库
-target_link_libraries(provider mprpc protobuf) 
+target_link_libraries(provider mprpc protobuf) # 生成的provider动态库需要连接 mprpc 和 protobuf库
