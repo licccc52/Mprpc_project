@@ -9,4 +9,4 @@ set(SRC_LIST userservice.cc ../user.pb.cc)
 #生成可执行文件 provider
 add_executable(provider ${SRC_LIST})
 # 需要链接的库
-target_link_libraries(provider mprpc protobuf) # 生成的provider动态库需要连接 mprpc 和 protobuf库
+target_link_libraries(provider mprpc protobuf) # 生成的provider动态库需要连接 mprpc库(还未生成, 在CMakeLists中找到相关的生成语句-> cmakelists.txt) 和 protobuf库(第三方已经准备好)

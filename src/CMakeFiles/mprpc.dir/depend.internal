@@ -4,6 +4,7 @@
 src/CMakeFiles/mprpc.dir/mprpcapplication.cc.o
  /home/lichuang/Mprpc_project/src/mprpcapplication.cc
  src/include/mprpcapplication.h
+ src/include/mprpcconfig.h
 src/CMakeFiles/mprpc.dir/rpcprovider.cc.o
  /home/lichuang/Mprpc_project/src/rpcprovider.cc
  src/include/rpcprovider.h
