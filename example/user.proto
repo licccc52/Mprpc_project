@@ -40,7 +40,7 @@ message RegisterResponse
 service UserServiceRpc //定义rpc方法
 {
     rpc Login(LoginRequest) returns(LoginResponse);
-    rpc Register(RegisterRequest) returns(RegisterResponse);
+    // rpc Register(RegisterRequest) returns(RegisterResponse);
 }
 
 //protoc user.proto --cpp_out=./

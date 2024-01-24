@@ -36,7 +36,7 @@ public:
         std::string name = request->name();
         std::string pwd = request->pwd();
 
-        //做本地业务
+        //做本地业务 
         bool login_result = Login(name, pwd); 
 
         //把响应写入 写错误码, 错误消息, 返回值
@@ -45,12 +45,14 @@ public:
         response->set_success(login_result);
 
         //执行回调操作 执行响应对象数据的序列化和网络发送(都是由框架完成)
+        //closure是protobuf提供的一个抽象类, run是一个虚函数,后续要定义一个类重写run()函数, 或者用一个lambda
         done->Run();
     }
 };
 
 int main(int argc, char **argv)
 {
+    
     //调用框架的初始化操作 -> 指定一个config.conf文件 读取 相关的网络服务器的配置中心的 IP 和 PORT
     MprpcApplication::Init(argc, argv);
 
@@ -58,6 +60,7 @@ int main(int argc, char **argv)
     //把UserService对象发布到rpc节点上
     //provider是一个rpc网络服务对象, 把UserService对象发布到rpc节点上
     RpcProvider provider;
+    //callee rpc服务的提供者, 可以把本地服务提供成rpc服务 
     provider.NotifyService(new UserService());
 
     //启动一个rpc服务发布节点, Run以后, 进程进入阻塞状态, 等待远程的rpc调用请求
