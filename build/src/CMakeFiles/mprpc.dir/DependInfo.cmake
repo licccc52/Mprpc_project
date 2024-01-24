@@ -6,14 +6,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/lichuang/Mprpc_project/src/mprpcapplication.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/mprpcapplication.cc.o"
   "/home/lichuang/Mprpc_project/src/mprpcconfig.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/mprpcconfig.cc.o"
+  "/home/lichuang/Mprpc_project/src/rpcheader.pb.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/rpcheader.pb.cc.o"
   "/home/lichuang/Mprpc_project/src/rpcprovider.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/rpcprovider.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "mprpc_EXPORTS"
-  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

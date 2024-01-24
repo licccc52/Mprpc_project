@@ -6,17 +6,3 @@
 
 #IncludeRegexTransform: 
 
-../src/include/mprpcconfig.h
-unordered_map
--
-string
--
-
-/home/lichuang/Mprpc_project/src/mprpcconfig.cc
-mprpcconfig.h
-/home/lichuang/Mprpc_project/src/mprpcconfig.h
-iostream
--
-string
--
-
