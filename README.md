@@ -31,8 +31,11 @@
 5. ./src 源代码
 6. ./test 测试
 
+## 提供静态库的方式(因为muduo是静态库), 动态库编译不成功
+
 ### static成员变量
 静态成员变量必须在类内声明, 在类外初始化
+
 
 ## 程序梳理
 服务的提供方会首先通过RpcProvider类注册服务对象和服务方法, 然后RpcProvider会用unordered_map表记录下来, RpcProvider启动之后, 相当于启动了一个Epoll+多线程的服务器; 启动了之后就可以接收远程的连接, 远程有新连接之后, moduo会调用RpcProvider::OnConnection; 如果远程有message, 会调用RpcProvider::Onmessage(), 会从数据头中解析出request参数, response由业务函数填, 然后业务函数执行回调函数发送回去 =>> SendRpcResponse()

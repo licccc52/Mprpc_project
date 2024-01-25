@@ -17,8 +17,8 @@ public:
     // 处理业务的方法
     bool Login(std::string name, std::string pwd)
     {
-        std::cout << "do local service Login" << std::endl;
-        std::cout << "name: " << name << " pwd: " << pwd << std::endl;
+        std::cout << "UserService::Login : Doing local service Login" << std::endl;
+        std::cout << "UserService::Login : name: " << name << " pwd: " << pwd << std::endl;
 
         return true;
     }
@@ -27,7 +27,7 @@ public:
     // 1. caller ===>> Login(LoginRequest) ==>> muduo  ==>> callee
     // 2. callee ===>> Login(LoginRequest) ==>> 交到下面重写的Login方法上
     //重写基类UserServiceRpc的虚函数, 下面这些方法都是框架直接调用的
-    virtual void Login(::google::protobuf::RpcController* controller,
+    void Login(::google::protobuf::RpcController* controller,
                        const ::fixbug::LoginRequest* request,
                        ::fixbug::LoginResponse* response,
                        ::google::protobuf::Closure* done)
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 {
     
     //调用框架的初始化操作 -> 指定一个config.conf文件 读取 相关的网络服务器的配置中心的 IP 和 PORT
-    MprpcApplication::Init(argc, argv);
+    MprpcApplication::Init(argc, argv);//读取配置文件
 
     //框架上发布服务
     //把UserService对象发布到rpc节点上

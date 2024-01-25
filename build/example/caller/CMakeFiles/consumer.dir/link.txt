@@ -1,0 +1,1 @@
+/usr/bin/g++  -g -g  -rdynamic CMakeFiles/consumer.dir/calluserservice.cc.o CMakeFiles/consumer.dir/__/user.pb.cc.o  -o ../../../bin/consumer   -L/home/lichuang/Mprpc_project/lib  -Wl,-rpath,/home/lichuang/Mprpc_project/lib ../../../lib/libmprpc.a -lprotobuf -lmuduo_net -lmuduo_base -lpthread 

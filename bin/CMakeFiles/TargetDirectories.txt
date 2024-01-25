@@ -8,3 +8,6 @@
 /home/lichuang/Mprpc_project/bin/example/callee/CMakeFiles/rebuild_cache.dir
 /home/lichuang/Mprpc_project/bin/example/callee/CMakeFiles/edit_cache.dir
 /home/lichuang/Mprpc_project/bin/example/callee/CMakeFiles/provider.dir
+/home/lichuang/Mprpc_project/bin/example/caller/CMakeFiles/rebuild_cache.dir
+/home/lichuang/Mprpc_project/bin/example/caller/CMakeFiles/edit_cache.dir
+/home/lichuang/Mprpc_project/bin/example/caller/CMakeFiles/consumer.dir

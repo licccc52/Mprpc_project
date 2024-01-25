@@ -42,5 +42,8 @@ service UserServiceRpc //定义rpc方法
     rpc Login(LoginRequest) returns(LoginResponse);
     // rpc Register(RegisterRequest) returns(RegisterResponse);
 }
+//service会生成两个类 UserServiceRpc 和  UserServiceRpc_Stub
+
+
 
 //protoc user.proto --cpp_out=./
