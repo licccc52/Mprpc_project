@@ -43,6 +43,7 @@ public:
         fixbug::ResultCode *code = response->mutable_result();
         code->set_errmsg("");
         response->set_success(login_result);
+        // response->set_success(false);
 
         //执行回调操作 执行响应对象数据的序列化和网络发送(都是由框架完成)
         //closure是protobuf提供的一个抽象类, run是一个虚函数,后续要定义一个类重写run()函数, 或者用一个lambda
