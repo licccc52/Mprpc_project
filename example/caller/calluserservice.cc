@@ -17,7 +17,7 @@ int main(int argc, char**argv)
     request.set_name("zhang san");
     request.set_pwd("123456");
 
-    //rpc方法的响应
+    //rpc方法的响应 
     fixbug::LoginResponse response;
 
     //发起rpc方法的调用 同步rpc调用过程 MprpcChannel::callmethod
@@ -32,6 +32,27 @@ int main(int argc, char**argv)
     {
         std::cout << "rpc login response error : " << response.result().errmsg();
     }
+
+
+    //调用远程发布的rpc方法 Register
+    fixbug::RegisterRequest req;
+    req.set_id(2000);
+    req.set_name("mprpc");
+    req.set_pwd("666666");
+    fixbug::RegisterResponse rsp;
+
+    //以同步的方式发起rpc调用请求,  等待返回结果
+    stub.Register(nullptr, &req, &rsp, nullptr);
+
+    if(rsp.result().errcode() == 0)
+    {
+        std::cout << "rpc Register response: " << response.success() << std::endl;
+    }
+    else
+    {
+        std::cout << "rpc Register response error : " << response.result().errmsg();
+    }
+
 
     return 0;
 }

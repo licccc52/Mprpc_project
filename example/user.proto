@@ -37,10 +37,10 @@ message RegisterResponse
 }
 
 //远程请求 : 被调用函数的名字+参数 + 调用之后返回什么类型
-service UserServiceRpc //定义rpc方法
+service UserServiceRpc //定义rpc方法w
 {
     rpc Login(LoginRequest) returns(LoginResponse);
-    // rpc Register(RegisterRequest) returns(RegisterResponse);
+    rpc Register(RegisterRequest) returns(RegisterResponse);
 }
 //service会生成两个类 UserServiceRpc 和  UserServiceRpc_Stub
 

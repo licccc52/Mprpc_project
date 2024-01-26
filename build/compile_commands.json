@@ -26,22 +26,22 @@
 },
 {
   "directory": "/home/lichuang/Mprpc_project/build/example/callee",
-  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/provider.dir/userservice.cc.o -c /home/lichuang/Mprpc_project/example/callee/userservice.cc",
-  "file": "/home/lichuang/Mprpc_project/example/callee/userservice.cc"
+  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/provider.dir/friendservice.cc.o -c /home/lichuang/Mprpc_project/example/callee/friendservice.cc",
+  "file": "/home/lichuang/Mprpc_project/example/callee/friendservice.cc"
 },
 {
   "directory": "/home/lichuang/Mprpc_project/build/example/callee",
-  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/provider.dir/__/user.pb.cc.o -c /home/lichuang/Mprpc_project/example/user.pb.cc",
-  "file": "/home/lichuang/Mprpc_project/example/user.pb.cc"
+  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/provider.dir/__/friend.pb.cc.o -c /home/lichuang/Mprpc_project/example/friend.pb.cc",
+  "file": "/home/lichuang/Mprpc_project/example/friend.pb.cc"
 },
 {
   "directory": "/home/lichuang/Mprpc_project/build/example/caller",
-  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/consumer.dir/calluserservice.cc.o -c /home/lichuang/Mprpc_project/example/caller/calluserservice.cc",
-  "file": "/home/lichuang/Mprpc_project/example/caller/calluserservice.cc"
+  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/consumer.dir/callfriendservice.cc.o -c /home/lichuang/Mprpc_project/example/caller/callfriendservice.cc",
+  "file": "/home/lichuang/Mprpc_project/example/caller/callfriendservice.cc"
 },
 {
   "directory": "/home/lichuang/Mprpc_project/build/example/caller",
-  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/consumer.dir/__/user.pb.cc.o -c /home/lichuang/Mprpc_project/example/user.pb.cc",
-  "file": "/home/lichuang/Mprpc_project/example/user.pb.cc"
+  "command": "/usr/bin/g++   -I/home/lichuang/Mprpc_project/src/include -I/home/lichuang/Mprpc_project/example  -g -g   -o CMakeFiles/consumer.dir/__/friend.pb.cc.o -c /home/lichuang/Mprpc_project/example/friend.pb.cc",
+  "file": "/home/lichuang/Mprpc_project/example/friend.pb.cc"
 }
 ]

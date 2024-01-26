@@ -23,6 +23,13 @@ public:
         return true;
     }
 
+    bool Register(uint32_t id, std::string name, std::string pwd)
+    {
+        std::cout << " doing local service : Register" <<std::endl;
+        std::cout << "id : " << id << ", name : " <<name << ", pwd" << pwd << std::endl;
+        return true;
+    }
+
     //用户登录 -> 发起一个rpc请求到服务器 -> 先被rpc框架接收 -> rpc框架根据请求和参数匹配函数调用
     // 1. caller ===>> Login(LoginRequest) ==>> muduo  ==>> callee
     // 2. callee ===>> Login(LoginRequest) ==>> 交到下面重写的Login方法上
@@ -48,6 +55,24 @@ public:
         //执行回调操作 执行响应对象数据的序列化和网络发送(都是由框架完成)
         //closure是protobuf提供的一个抽象类, run是一个虚函数,后续要定义一个类重写run()函数, 或者用一个lambda
         done->Run();
+    }
+
+    void Register(::google::protobuf::RpcController* controller,
+                       const ::fixbug::RegisterRequest* request,
+                       ::fixbug::RegisterResponse* response,
+                       ::google::protobuf::Closure* done)
+    {
+        uint32_t id = request->id();
+        std::string name = request->name();
+        std::string pwd = request->pwd();
+
+        bool ret = Register(id, name, pwd);
+
+        response->mutable_result()->set_errcode(0);
+        response->mutable_result()->set_errmsg("");
+        response->set_success(ret);
+
+        done->Run(); //RpcProvider::SendRpcResponse
     }
 };
 

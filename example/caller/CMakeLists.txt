@@ -1,7 +1,9 @@
 # 将该目录下的全部源文件都添加到变量名中
 # aux_source_directory(. SRC_LIST)
 # aux_source_directory(../src PROTO_LIST)
-set(SRC_LIST calluserservice.cc ../user.pb.cc)
+# set(SRC_LIST calluserservice.cc ../user.pb.cc)
+set(SRC_LIST callfriendservice.cc ../friend.pb.cc)
+
 
 # 生成可执行文件所需要的源文件
 # add_executable(provider ${SRC_LIST} ${PROTO_LIST})
