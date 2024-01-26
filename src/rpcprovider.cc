@@ -22,7 +22,8 @@ void RpcProvider::NotifyService(google::protobuf::Service *service)
     //获取服务对象service的方法的数量
     int methodCnt = pserviceDesc->method_count();
 
-    std::cout << "RpcProvider::NotifyService ,service_name: " << service_name <<std::endl;
+    // std::cout << "RpcProvider::NotifyService ,service_name: " << service_name <<std::endl;
+    LOG_INFO("RpcProvider::NotifyService ,service_name : %s", service_name.c_str());
 
     for(int i=0; i < methodCnt; ++i)
     {
@@ -31,7 +32,8 @@ void RpcProvider::NotifyService(google::protobuf::Service *service)
         std::string method_name = pmethodDesc->name();
         service_info.m_methodMap.insert({method_name, pmethodDesc});
 
-        std::cout << "RpcProvider::NotifyService, method_name: " << method_name <<std::endl;
+        // std::cout << "RpcProvider::NotifyService, method_name: " << method_name <<std::endl;
+        LOG_INFO("RpcProvider::NotifyService ,method_name : %s", method_name.c_str());    
     }
     service_info.m_service = service;//服务对象, 之后可以用该服务对象调用相应的map中的服务方法
     m_serviceMap.insert({service_name, service_info});
@@ -60,7 +62,9 @@ void RpcProvider::Run()
     //设置muduo库的线程数量-> muduo会根据数量自动分发IO线程和工作线程, 如果线程数量是1,那么IO线程和工作线程在一个线程中
     server.setThreadNum(4);
     
-    std::cout << "RpcProvider::Run(), RpcProvider start service at ip: " << ip << " port: " << port << std::endl;
+    // std::cout << "RpcProvider::Run(), RpcProvider start service at ip: " << ip << " port: " << port << std::endl;  
+    LOG_INFO("RpcProvider::Run(), RpcProvider start service at ip: %s, port : %d", ip.c_str(), port);    
+
     //启动网络服务
     server.start();
     m_eventLoop.loop(); //启动epoll_wait(), 以阻塞的方式等待远程连接
@@ -74,7 +78,7 @@ void RpcProvider::OnConnection(const muduo::net::TcpConnectionPtr &conn)
     if(!conn->connected())
     {
         //rpc client的连接断开了
-        std::cout << "RpcProvider::OnConnection, New Connection Comming;  getTcpInfoString() : " << conn->getTcpInfoString() << std::endl;
+        // std::cout << "RpcProvider::OnConnection, New Connection Comming;  getTcpInfoString() : " << conn->getTcpInfoString() << std::endl;
         conn->shutdown();
     }
 }
@@ -114,8 +118,10 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn, muduo::net
     else
     {
         //数据头反序列化失败
-        std::cout << "header_size" << header_size  << std::endl;
-        std::cout << "RpcProvider::OnmMessage : rpc_header_str: " << rpc_header_str << " parse error!" << std::endl;
+        // std::cout << "header_size" << header_size  << std::endl;
+        // std::cout << "RpcProvider::OnmMessage : rpc_header_str: " << rpc_header_str << " parse error!" << std::endl;
+        LOG_INFO("RpcProvider::OnmMessage : rpc_header_str : %s, arse error!", rpc_header_str.c_str());    
+        
         return;
     }
 
@@ -135,7 +141,8 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn, muduo::net
     auto it = m_serviceMap.find(service_name);
     if(it == m_serviceMap.end())
     {
-        std::cout << service_name << " is not exist!" << std::endl;
+        // std::cout << service_name << " is not exist!" << std::endl;
+        LOG_INFO("%s  is not exist!", service_name.c_str());
         return;
     }
 
@@ -143,6 +150,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn, muduo::net
     if(mit == it->second.m_methodMap.end())
     {
         std::cout << service_name << ": " << method_name << " is not exist!" << std::endl;
+        LOG_INFO("%s : %s is not exist!", service_name.c_str(), method_name.c_str());
         return;
     }
 
@@ -154,6 +162,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn, muduo::net
     if(!request->ParseFromString(args_str))
     { 
         std::cout << "request parse error! content: " << args_str <<std::endl;
+        LOG_ERR("request parse error!");
         return;
     }
     google::protobuf::Message *response = service->GetResponsePrototype(method).New();
@@ -181,6 +190,7 @@ void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr& conn, goog
     else
     {
         std::cout << "SerializeToString response_str error! " << std::endl;
+        LOG_INFO("SerializeToString response_str error! ");
     }
     
 }
