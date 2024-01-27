@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/lichuang/Mprpc_project/src/mprpccontroller.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/mprpccontroller.cc.o"
   "/home/lichuang/Mprpc_project/src/rpcheader.pb.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/rpcheader.pb.cc.o"
   "/home/lichuang/Mprpc_project/src/rpcprovider.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/rpcprovider.cc.o"
+  "/home/lichuang/Mprpc_project/src/zookeeperutil.cc" "/home/lichuang/Mprpc_project/build/src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
