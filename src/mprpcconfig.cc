@@ -8,8 +8,8 @@ void MprpcConfig::LoadConfigFile(const char *config_file)
     FILE *pf = fopen(config_file, "r");
     if(nullptr == pf)
     {
-    std::cout << config_file << " is not exist!" << std::endl;
-    exit(EXIT_FAILURE);
+        std::cout << config_file << " is not exist!" << std::endl;
+        exit(EXIT_FAILURE);
     }
 
     // 1.注释 2.正确的配置项 =  3. 去掉开头的多余的空格

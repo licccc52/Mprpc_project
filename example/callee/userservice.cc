@@ -40,6 +40,7 @@ public:
                        ::google::protobuf::Closure* done)
     {
         //框架给业务上报了请求参数LoginRequest, 业务获取相应数据做本地业务
+        //框架已经自动帮忙把发送过来的东西反序列化了
         std::string name = request->name();
         std::string pwd = request->pwd();
 
