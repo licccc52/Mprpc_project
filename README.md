@@ -40,10 +40,46 @@
 ## 程序梳理
 服务的提供方会首先通过RpcProvider类注册服务对象和服务方法, 然后RpcProvider会用unordered_map表记录下来, RpcProvider启动之后, 相当于启动了一个Epoll+多线程的服务器; 启动了之后就可以接收远程的连接, 远程有新连接之后, moduo会调用RpcProvider::OnConnection; 如果远程有message, 会调用RpcProvider::Onmessage(), 会从数据头中解析出request参数, response由业务函数填, 然后业务函数执行回调函数发送回去 =>> SendRpcResponse()
 
+### 关键函数
+1. Init(),初始化Rpc服务器
+void MprpcApplication::Init(int argc, char **argv)
 
+2. //负责解析加载配置文件
+void LoadConfigFile(const char *config_file);
+
+3. //查询配置项信息
+std::string Load(std::string key);
+
+4. 启动rpc服务节点, 开始提供rpc远程网络调用服务
+void RpcProvider::Run()
+
+5. 已建立连接用户的读写时间回调, 如果远程有一个rpc服务的调用请求, 那么OnMessage方法就会相应
+void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn, muduo::net::Buffer *buffer,  muduo::Timestamp)
+接收传过来的数据流, 反序列化, 解析出service对象和method_name, 执行对应函数, 把结果返回 
+
+6. //启动rpc服务节点, 开始提供rpc远程网络调用服务, 调用muduo网络库, 绑定连接和发送消息的回调函数
+void RpcProvider::Run();
+
+7. mprpccontroller类
+记录程序运行中的信息,主要是记录各个重要函数运行的状态信息
 
 ### 单例模式
 在单例模式中， 只有一个对象，类的设计旨在确保一个类只有一个实例，并提供一个全局的访问点来获取该实例。删除拷贝构造函数是为了防止通过拷贝构造函数创建类的多个实例，从而违反了单例模式的初衷
+
+### znode节点存储格式
+在ZooKeeper中创建一个ZNode时，可以选择为其分配一些数据。这个数据是以字节数组的形式存储的，因此它可以是任何形式的信息，包括文本、二进制数据等。ZNode的数据通常用于存储配置信息、临时状态、协调信息等。
+
+除了数据之外，每个ZNode还包含一些元数据信息，如：
+
+节点路径（Path）： 这是ZNode在ZooKeeper命名空间中的唯一标识符，类似于文件系统中的路径。例如，/myapp/config。
+
+节点版本号（Version Number）： 每次ZNode的数据发生变化时，版本号都会递增。这个版本号在更新和删除操作中很重要，用于实现乐观锁机制。
+
+ACL（Access Control List）： 它指定了谁有权访问该节点以及对该节点的哪些操作有权限。ACL用于控制对ZNode的读写权限。
+
+时间戳（Timestamp）： 记录了ZNode的创建时间或最后一次修改时间。
+
+ZNode可以以树状结构组织，每个ZNode都可以有多个子节点，这些子节点也是ZNode。这种层次结构允许您在ZooKeeper中构建复杂的数据模型，用于各种分布式系统任务。
 
 ### zookeeper客户端常用命令
 ls :  罗列当前指定目录节点
@@ -62,3 +98,5 @@ Zookeeper提供了分布式数据的发布/订阅功能，可以让客户端订�
 黄色部分: 设计rpc方法参数的打包和解析, 也就是数据的序列化和反序列化, 使用protobuf
 
 绿色部分: 网络部分, 包括寻找rpc服务主机, 发起rpc调用请求和响应rpc调用结果,使用muduo网络库和zookeeper服务配置中心
+
+![RPC项目结构](项目代码交互图-用画图板打开.png)
